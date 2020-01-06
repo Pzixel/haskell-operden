@@ -34,6 +34,8 @@ import System.IO
 import Control.Lens       hiding ((.=))
 
 type UserAPI = "users" :> Get '[JSON] [User]
+           :<|> "albert" :> Get '[JSON] User
+           :<|> "isaac" :> Get '[JSON] User
 
 data User = User
   { name :: String
@@ -43,11 +45,14 @@ data User = User
   } deriving stock (Eq, Show, Generic)
     deriving anyclass (ToJSON, ToSchema)
 
+isaac :: User
+isaac = User "Isaac Newton" 372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
+
+albert :: User
+albert = User "Albert Einstein" 136 "ae@mc2.org" (fromGregorian 1905 12 1)
+
 users :: [User]
-users =
-  [ User "Isaac Newton"    372 "isaac@newton.co.uk" (fromGregorian 1683  3 1)
-  , User "Albert Einstein" 136 "ae@mc2.org"         (fromGregorian 1905 12 1)
-  ]
+users = [isaac, albert]
 
 userAPI :: Proxy API
 userAPI = Proxy
@@ -56,7 +61,7 @@ type API = SwaggerSchemaUI "swagger-ui" "swagger.json"
     :<|> UserAPI
 
 server :: Server API
-server = swaggerSchemaUIServer swaggerDoc :<|> pure users
+server = swaggerSchemaUIServer swaggerDoc :<|> pure users :<|> pure albert :<|> pure isaac
 
 app :: Application
 app = serve userAPI server
