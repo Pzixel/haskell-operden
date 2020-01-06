@@ -37,7 +37,11 @@ dependencies:
 - blaze-html
 - servant
 - lucid
+- servant-swagger
 - servant-swagger-ui
+- swagger2
+- lens
+- text
 
 library:
   source-dirs: src

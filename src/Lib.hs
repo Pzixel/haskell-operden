@@ -30,17 +30,20 @@ import Lucid
 import Network.HTTP.Media ((//), (/:))
 import Network.Wai
 import Network.Wai.Handler.Warp
-import Servant
 import System.Directory
 import Text.Blaze
 import Text.Blaze.Html.Renderer.Utf8
 import Servant.Types.SourceT (source)
 import qualified Data.Aeson.Parser
 import qualified Text.Blaze.Html
+import Data.Swagger
+import Servant
+import Servant.Swagger
 import Servant.Swagger.UI
 import System.IO
+import Control.Lens       hiding ((.=))
 
-type UserAPI1 = "users" :> Get '[JSON] [User]
+type UserAPI = "users" :> Get '[JSON] [User]
 
 data User = User
   { name :: String
@@ -50,24 +53,34 @@ data User = User
   } deriving (Eq, Show, Generic)
 
 instance ToJSON User
+instance ToSchema User
 
-users1 :: [User]
-users1 =
+users :: [User]
+users =
   [ User "Isaac Newton"    372 "isaac@newton.co.uk" (fromGregorian 1683  3 1)
   , User "Albert Einstein" 136 "ae@mc2.org"         (fromGregorian 1905 12 1)
   ]
 
-server1 :: Server UserAPI1
-server1 = return users1
-
-userAPI :: Proxy UserAPI1
+userAPI :: Proxy API
 userAPI = Proxy
 
-app1 :: Application
-app1 = serve userAPI server1
+type API = SwaggerSchemaUI "swagger-ui" "swagger.json"
+    :<|> UserAPI
+
+server :: Server API
+server = swaggerSchemaUIServer swaggerDoc :<|> pure users
+
+app :: Application
+app = serve userAPI server
+
+swaggerDoc :: Swagger
+swaggerDoc = toSwagger (Proxy :: Proxy UserAPI)
+    & info.title       .~ "Operden API"
+    & info.version     .~ "1.0.0"
+    & info.description ?~ "This is an API that perform some operen actions"
 
 someFunc :: IO ()
 someFunc = do
   print "Running"
   hFlush stdout
-  run 8081 app1
+  run 8081 app
