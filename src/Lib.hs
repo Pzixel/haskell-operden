@@ -1,13 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeOperators #-}
-
 module Lib
     ( someFunc
     ) where
@@ -50,10 +40,8 @@ data User = User
   , age :: Int
   , email :: String
   , registration_date :: Day
-  } deriving (Eq, Show, Generic)
-
-instance ToJSON User
-instance ToSchema User
+  } deriving stock (Eq, Show, Generic)
+    deriving anyclass (ToJSON, ToSchema)
 
 users :: [User]
 users =

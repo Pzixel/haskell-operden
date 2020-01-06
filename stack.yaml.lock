@@ -10,7 +10,7 @@ packages:
       size: 11577
       sha256: ed5ce184eaad3b4239f86d1d478d0b5ed6a93af5aac72f19f376c1690585576d
   original:
-    hackage: lzma-clib-5.2.2@sha256:25eb43d5fd8a8ab58380f475b91fb1fa907381f8a81c8d8ba63ba428d97ae0cc,4900
+    hackage: lzma-clib-5.2.2
 snapshots:
 - completed:
     size: 524155

@@ -67,3 +67,16 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - haskell-operden
+
+default-extensions:
+  - DataKinds
+  - DeriveAnyClass
+  - DeriveGeneric
+  - DerivingStrategies
+  - FlexibleInstances
+  - GeneralizedNewtypeDeriving
+  - MultiParamTypeClasses
+  - OverloadedStrings
+  - RankNTypes
+  - ScopedTypeVariables
+  - TypeOperators
