@@ -42,6 +42,10 @@ dependencies:
 - swagger2
 - lens
 - text
+- persistent
+- persistent-postgresql
+- persistent-template
+- monad-logger
 
 library:
   source-dirs: src

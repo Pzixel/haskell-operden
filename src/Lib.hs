@@ -32,18 +32,14 @@ import Servant.Swagger
 import Servant.Swagger.UI
 import System.IO
 import Control.Lens       hiding ((.=))
+import Persistence
 
 type UserAPI = "users" :> Get '[JSON] [User]
            :<|> "albert" :> Get '[JSON] User
            :<|> "isaac" :> Get '[JSON] User
 
-data User = User
-  { name :: String
-  , age :: Int
-  , email :: String
-  , registration_date :: Day
-  } deriving stock (Eq, Show, Generic)
-    deriving anyclass (ToJSON, ToSchema)
+instance ToJSON User
+instance ToSchema User
 
 isaac :: User
 isaac = User "Isaac Newton" 372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
@@ -74,6 +70,8 @@ swaggerDoc = toSwagger (Proxy :: Proxy UserAPI)
 
 someFunc :: IO ()
 someFunc = do
-  print "Running"
+  print $ foo "Running"
+  _ <- m
+  print $ foo "Inserted"
   hFlush stdout
   run 8081 app
