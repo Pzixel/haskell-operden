@@ -47,8 +47,8 @@ isaac = User "Isaac Newton" 372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
 albert :: User
 albert = User "Albert Einstein" 136 "ae@mc2.org" (fromGregorian 1905 12 1)
 
-users :: [User]
-users = [isaac, albert]
+users :: Handler [User]
+users = liftIO getPersons
 
 userAPI :: Proxy API
 userAPI = Proxy
@@ -57,7 +57,7 @@ type API = SwaggerSchemaUI "swagger-ui" "swagger.json"
     :<|> UserAPI
 
 server :: Server API
-server = swaggerSchemaUIServer swaggerDoc :<|> pure users :<|> pure albert :<|> pure isaac
+server = swaggerSchemaUIServer swaggerDoc :<|> users :<|> pure albert :<|> pure isaac
 
 app :: Application
 app = serve userAPI server
@@ -71,7 +71,7 @@ swaggerDoc = toSwagger (Proxy :: Proxy UserAPI)
 someFunc :: IO ()
 someFunc = do
   print $ foo "Running"
-  _ <- m
+  --_ <- m
   print $ foo "Inserted"
   hFlush stdout
   run 8081 app

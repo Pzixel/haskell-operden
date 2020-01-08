@@ -21,40 +21,45 @@ description:         Please see the README on GitHub at <https://github.com/Pzix
 
 dependencies:
 - base >= 4.7 && < 5
-- servant-server
-- base-compat
-- mtl
 - aeson
 - attoparsec
-- bytestring
-- string-conversions
-- time
-- http-media
-- wai
-- warp
-- directory
-- blaze-markup
+- base-compat
 - blaze-html
-- servant
-- lucid
-- servant-swagger
-- servant-swagger-ui
-- swagger2
+- blaze-markup
+- bytestring
+- conduit
+- directory
+- esqueleto
+- http-media
 - lens
-- text
+- lucid
+- monad-logger
+- mtl
 - persistent
 - persistent-postgresql
 - persistent-template
-- monad-logger
+- servant
+- servant-server
+- servant-swagger
+- servant-swagger-ui
+- string-conversions
+- swagger2
+- text
+- time
+- wai
+- warp
 
 library:
   source-dirs: src
+  ghc-options:
+    - -Wall
 
 executables:
   haskell-operden-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
+    - -Wall
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N

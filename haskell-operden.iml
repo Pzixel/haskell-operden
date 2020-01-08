@@ -176,5 +176,7 @@
     <orderEntry type="library" name="Only-0.1" level="project" />
     <orderEntry type="library" name="bytestring-builder-0.10.8.2.0" level="project" />
     <orderEntry type="library" name="time-locale-compat-0.1.1.5" level="project" />
+    <orderEntry type="library" name="esqueleto-3.0.0" level="project" />
+    <orderEntry type="library" name="unliftio-0.2.12" level="project" />
   </component>
 </module>
