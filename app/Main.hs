@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import AppMonad
 
 main :: IO ()
-main = someFunc
+main = testMain
