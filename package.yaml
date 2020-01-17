@@ -20,7 +20,7 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/Pzixel/haskell-operden>
 
 dependencies:
-  - base
+  - base >= 4.7 && < 5
   - aeson
   - attoparsec
   - base-compat
@@ -30,7 +30,6 @@ dependencies:
   - conduit
   - directory
   - esqueleto
-  - exceptions
   - http-media
   - lens
   - lucid
@@ -44,17 +43,16 @@ dependencies:
   - servant-swagger
   - servant-swagger-ui
   - string-conversions
-  - transformers-base
-  - transformers
   - swagger2
   - text
   - time
   - wai
   - warp
+  - exceptions
+  - transformers
   - monad-control
   - unliftio-core
   - resource-pool
-  - conduit-extra
 
 library:
   source-dirs: src
